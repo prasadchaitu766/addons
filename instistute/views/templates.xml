@@ -23,6 +23,9 @@
           <header>
                <button name="generate_record_name" string="Generate name" type="object"  class="oe_highlight" attrs="{'invisible':[('username','!=',False)]}"/>
                         <button name="generate_record_password" string="Generate Password" type="object" class="oe_highlight" attrs="{'invisible':[('password','!=',False)]}"/>
+                  <button name="generate_student_id" type="object" class="oe_highlight" attrs="{'invisible':[('s_id','!=',False)]}" string="Genarate_id"/>
+
+                  <button name="send_mail_template" type="object" string="Send Email"/>
 
             </header>
           <sheet>
@@ -81,9 +84,17 @@
       <field name="res_model">student.register</field>
       <field name="view_model">tree,form</field>
     </record>
+    <record id="seq_test" model="ir.sequence">
+    <field name="name">Test</field>
+    <field name="code">test_seq_id</field>
+    <field name="prefix">PB/MC</field>
+    <field name="padding">3</field>
+    <field name="company_id" eval="False"/>
+  </record>
 
     <menuitem name="Instistute" id="instistute_menu"/>
     <menuitem name="Instistute-list" id="instistute.menu_1" parent="instistute_menu" action="student_form_action"/>
+
 
     </data>
 </odoo>

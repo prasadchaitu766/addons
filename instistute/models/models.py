@@ -3,6 +3,7 @@ from datetime import datetime
 
 import random
 import string
+import smtp
 from random import randint
 
 from odoo import models, fields, api
@@ -10,6 +11,8 @@ from odoo import models, fields, api
 class StudentRegistaration(models.Model):
 	_name = "student.register"
 
+
+	s_id = fields.Char(string="Student-id" readonly=True)
 	name = fields.Char(string="StudentName") 
 	age = fields.Integer(string="Age",help="enter age")
 	date_of_birth = fields.Date(string="Date-Of-Birth")
@@ -37,7 +40,6 @@ class StudentRegistaration(models.Model):
 	def generate_record_name(self):
 		# self.username="prasad"
 		f=({'name': ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(randint(9,15)))})
-		print f ,"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 		self.username=f["name"]
 
 	@api.multi
@@ -49,18 +51,19 @@ class StudentRegistaration(models.Model):
 		
 
 		
-	# 	return True
-	# # @api.model
+	@api.one
 
-	# def create(self, vals):
- #    # print "+++++++++++++++++++++++++++++++++++++++++++++++++"
- #    # print "prepare inherit create function"
- #    # print "change the name TI with sequence"
- #    vals['name'] = self.env['ir.sequence'].next_by_code('test.input.machine')
- #    # print "Inherit complete"
- #    # print "+++++++++++++++++++++++++++++++++++++++++++++++++"
- #    return super(test_input_machine, self).create(vals)
-	
+	def generate_student_id(self):
+		if self.s_id ==False:
+			next_id = self.env["ir.sequence"].next_by_code("test_seq_id")
+			self.s_id =next_id
+		else:
+			pass
+	def send_mail_template(self): 
+        # Find the e-mail template
+        template = self.env.ref('student.example_email_template1')
+        # Send out the e-mail template to the user
+        self.env['mail.template'].browse(template.id).send_mail(self.id, force_send=True)
 
 
 
