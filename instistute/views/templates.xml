@@ -24,6 +24,8 @@
                <button name="generate_record_name" string="Generate name" type="object"  class="oe_highlight" attrs="{'invisible':[('username','!=',False)]}"/>
                         <button name="generate_record_password" string="Generate Password" type="object" class="oe_highlight" attrs="{'invisible':[('password','!=',False)]}"/>
                   <button name="generate_student_id" type="object" class="oe_highlight" attrs="{'invisible':[('s_id','!=',False)]}" string="Genarate_id"/>
+<button name="send_mail_template" type="object" string="Send Email"/>
+.
 
                   <button name="send_mail_template" type="object" string="Send Email"/>
 

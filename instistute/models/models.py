@@ -64,6 +64,11 @@ class StudentRegistaration(models.Model):
         template = self.env.ref('student.example_email_template1')
         # Send out the e-mail template to the user
         self.env['mail.template'].browse(template.id).send_mail(self.id, force_send=True)
+	
+	def send_mail_template(self): 
+
+		template = self.env.ref('instistute.email_sending_process')
+		self.env['mail.template'].browse(template.id).send_mail(self.id, force_send=True)
 
 
 
